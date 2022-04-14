@@ -2,7 +2,7 @@ let elements = ["ROCK", "PAPER", "SCISSORS"];
 let playerWinCount = 0;
 let computerWinCount = 0;
 
-playRound();
+playGame();
 
 function computerPlay() {
     let computerSelection = Math.floor(Math.random() * 3);
@@ -38,3 +38,18 @@ function playRound() {
         computerWinCount++;
     }    
 }
+
+function playGame() {
+    for (let i = 0; i < 5; i++) {
+        playRound();
+        if (playerWinCount == 3) {
+            alert("YOU WIN BEST OF 5 !!!");
+            break;    
+        }
+        else if (computerWinCount == 3) {
+            alert("YOU LOSE BEST OF 5 !!!");
+            break;
+        }
+    }
+}
+
