@@ -1,29 +1,38 @@
 let elements = ["ROCK", "PAPER", "SCISSORS"];
 let playerWinCount = 0;
 let computerWinCount = 0;
+let playerSelection = "";
 
-playGame();
+let buttons = document.querySelectorAll("button");
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", selection = () => {
+            playerSelection = button.id;
+            playGame();
+        });
+    });
+
+let computerScore = document.createElement("div");
+computerScore.textContent = "Computer score: " + computerWinCount;
+
+let playerScore = document.createElement("div");
+playerScore.textContent = "Player score: " + playerWinCount;
+
+para = document.querySelector("p");
+para.appendChild(playerScore);
+para.appendChild(computerScore);
+    
+
+alert("click a button");    
 
 function computerPlay() {
     let computerSelection = Math.floor(Math.random() * 3);
     return elements[computerSelection];
 }
 
-function promptPlayerSelection() {
-
-    let initialPlayerSelection = prompt("Select rock, paper or scissors", "");
-    let playerSelection = initialPlayerSelection.toUpperCase();
-
-    if (!(playerSelection == "ROCK" || playerSelection == "PAPER" || playerSelection == "SCISSORS")) {
-        alert("Select a valid response");
-        promptPlayerSelection();
-    }
-    return playerSelection;
-}
-
 function playRound() {
     computerSelection = computerPlay();
-    playerSelection = promptPlayerSelection();
+    alert(playerSelection);
     
     if (playerSelection == computerSelection) {
         alert(`${playerSelection} vs ${computerSelection}, DRAW!`);
@@ -32,24 +41,16 @@ function playRound() {
     else if (playerSelection == "ROCK" && computerSelection == "SCISSORS" || playerSelection == "SCISSORS" && computerSelection == "PAPER" || playerSelection == "PAPER" && computerSelection == "ROCK") {
         alert(`${playerSelection} beats ${computerSelection}, YOU WIN!`);
         playerWinCount++;
+        playerScore.textContent = "Player score: " + playerWinCount;
     }
     else if (playerSelection == "ROCK" && computerSelection == "PAPER" || playerSelection == "SCISSORS" && computerSelection == "ROCK" || playerSelection == "PAPER" && computerSelection == "SCISSORS") {
         alert(`${playerSelection} loses to ${computerSelection}, YOU LOSE!`);
         computerWinCount++;
-    }    
+        computerScore.textContent = "Computer score: " + computerWinCount; 
+    }     
 }
 
 function playGame() {
-    for (let i = 0; i < 5; i++) {
-        playRound();
-        if (playerWinCount == 3) {
-            alert("YOU WIN BEST OF 5 !!!");
-            break;    
-        }
-        else if (computerWinCount == 3) {
-            alert("YOU LOSE BEST OF 5 !!!");
-            break;
-        }
-    }
+    playRound();
 }
 
